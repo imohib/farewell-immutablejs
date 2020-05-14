@@ -1,0 +1,31 @@
+{
+  "name": "farewell-immutablejs",
+  "version": "1.0.0",
+  "description": "Codemods to replace ImmutableJS library with ES6.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc --init",
+    "eslint": "eslint --init"
+  },
+  "keywords": [
+    "codemods",
+    "immutablejs",
+    "jscodeshift"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-typescript": "^7.9.0",
+    "@types/jest": "^25.2.2",
+    "@types/jscodeshift": "^0.7.0",
+    "@typescript-eslint/eslint-plugin": "^2.33.0",
+    "@typescript-eslint/parser": "^2.33.0",
+    "babel-jest": "^26.0.1",
+    "eslint": "^7.0.0",
+    "jest": "^26.0.1",
+    "jscodeshift": "^0.9.0",
+    "typescript": "^3.9.2"
+  }
+}
