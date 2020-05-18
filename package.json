@@ -2,7 +2,7 @@
   "name": "farewell-immutablejs",
   "version": "1.0.0",
   "description": "Codemods to replace ImmutableJS library with ES6.",
-  "main": "index.js",
+  "bin": "src/bin/index.js",
   "scripts": {
     "test": "jest",
     "build": "tsc --init",
@@ -25,7 +25,15 @@
     "babel-jest": "^26.0.1",
     "eslint": "^7.0.0",
     "jest": "^26.0.1",
-    "jscodeshift": "^0.9.0",
     "typescript": "^3.9.2"
+  },
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "execa": "^4.0.1",
+    "globby": "^11.0.0",
+    "inquirer": "^7.1.0",
+    "is-git-clean": "^1.1.0",
+    "jscodeshift": "^0.9.0",
+    "meow": "^7.0.1"
   }
 }
