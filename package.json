@@ -4,16 +4,30 @@
   "description": "Codemods to replace ImmutableJS library with ES6.",
   "bin": "src/bin/index.js",
   "scripts": {
+    "start": "node src/bin/index.js",
     "test": "jest",
-    "build": "tsc --init",
-    "eslint": "eslint --init"
+    "lint": "eslint ."
+  },
+  "files": [
+    "src/**"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "homepage": "https://github.com/raphaelbs/farewell-immutablejs#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raphaelbs/farewell-immutablejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/raphaelbs/farewell-immutablejs/issues"
   },
   "keywords": [
     "codemods",
     "immutablejs",
     "jscodeshift"
   ],
-  "author": "",
+  "author": "Raphael Brandão",
   "license": "ISC",
   "devDependencies": {
     "@babel/preset-env": "^7.9.6",
