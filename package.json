@@ -2,18 +2,17 @@
   "name": "farewell-immutablejs",
   "version": "1.0.0",
   "description": "Codemods to replace ImmutableJS library with ES6.",
-  "bin": "src/bin/index.js",
+  "bin": "dist/bin/index.js",
   "scripts": {
     "start": "node src/bin/index.js",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "build": "node build.js",
+    "prepare": "npm run build"
   },
   "files": [
-    "src/**"
+    "dist/**"
   ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "homepage": "https://github.com/raphaelbs/farewell-immutablejs#readme",
   "repository": {
     "type": "git",
@@ -38,6 +37,7 @@
     "@typescript-eslint/parser": "^2.33.0",
     "babel-jest": "^26.0.1",
     "eslint": "^7.0.0",
+    "fs-extra": "^9.0.0",
     "jest": "^26.0.1",
     "typescript": "^3.9.2"
   },
