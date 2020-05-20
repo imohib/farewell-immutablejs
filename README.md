@@ -11,8 +11,10 @@ Never heard of codemods? Here is a quick summary from [facebook/codemod](https:/
 
 ## How to use
 
-> npm install -g farewell-immutablejs
-> farewell-immutablejs
+```bash
+npm install -g farewell-immutablejs
+farewell-immutablejs
+```
 
 ## Features
 
