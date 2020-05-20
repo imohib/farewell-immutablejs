@@ -1,10 +1,7 @@
 const newState = {
   ...state,
-
-  ...{
-    a: true,
-    b: [mockList],
-  }
+  a: true,
+  b: [mockList]
 };
 const newState1 = {
   ...resultingState,

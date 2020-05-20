@@ -1,4 +1,4 @@
-import { Transform, CallExpression, ASTPath, JSCodeshift, MemberExpression } from "jscodeshift";
+import { Transform, CallExpression, ASTPath, JSCodeshift, MemberExpression, ObjectExpression } from "jscodeshift";
 
 class Handler {
   private j: JSCodeshift;
@@ -28,13 +28,21 @@ class Handler {
 
     const baseObject = (this.path.node.callee as MemberExpression).object;
     const argument = this.path.node.arguments[0] as any;
+    let newArgument: any[] = [this.j.spreadElement(argument)];
+
+    if (argument.type === 'ObjectExpression') {
+      const objectArgument = argument as ObjectExpression;
+
+      newArgument = [...objectArgument.properties];
+    }
 
     this.path.replace(
       this.j.objectExpression([
         this.j.spreadElement(baseObject),
-        this.j.spreadElement(argument),
+        ...newArgument,
       ])
     )
+
   }
 }
 
