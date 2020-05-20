@@ -9,6 +9,11 @@ Never heard of codemods? Here is a quick summary from [facebook/codemod](https:/
 
 > codemod is a tool/library to assist you with large-scale codebase refactors that can be partially automated but still require human oversight and occasional intervention.
 
+## How to use
+
+> npm install -g farewell-immutablejs
+> farewell-immutablejs
+
 ## Features
 
 ### Drop immutable import
@@ -87,10 +92,10 @@ Never heard of codemods? Here is a quick summary from [facebook/codemod](https:/
 
 ```diff
 - const newState = state.merge({ a: 10 });
-+ const newState = { ...state, ...{ a: 10 } };
++ const newState = { ...state, a: 10 };
 ```
 
-## Non supported methods
+## Unsupported methods
 
 The methods below have either small cost-benefit to implement a codemod or are too difficult to implement given name collisions.
 
