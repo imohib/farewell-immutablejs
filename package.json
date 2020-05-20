@@ -1,6 +1,6 @@
 {
   "name": "farewell-immutablejs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Codemods to replace ImmutableJS library with ES6.",
   "bin": "dist/bin/index.js",
   "scripts": {
