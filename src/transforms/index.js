@@ -31,4 +31,8 @@ exports.TRANSFORMER_INQUIRER_CHOICES = [
     name: 'Replace merge() calls.',
     value: 'replaceMerge',
   },
+  {
+    name: 'Nest FromJS.',
+    value: 'nestFromJS',
+  },
 ];
