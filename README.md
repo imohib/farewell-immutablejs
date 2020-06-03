@@ -12,9 +12,15 @@ Never heard of codemods? Here is a quick summary from [facebook/codemod](https:/
 ## How to use
 
 ```bash
+# installing globally
 npm install -g farewell-immutablejs
 farewell-immutablejs
+
+# or using npx
+npx farewell-immutablejs
 ```
+
+Use the `--help` flag or refer to the [help file](./src/bin/help.txt).
 
 ## Features
 
