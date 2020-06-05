@@ -1,5 +1,5 @@
 {
-  "name": "farewell-immutablejs",
+  "name": "@quintoandar/farewell-immutablejs",
   "version": "1.0.3",
   "description": "Codemods to replace ImmutableJS library with ES6.",
   "bin": "dist/bin/index.js",
@@ -13,13 +13,13 @@
   "files": [
     "dist/**"
   ],
-  "homepage": "https://github.com/raphaelbs/farewell-immutablejs#readme",
+  "homepage": "https://github.com/quintoandar/farewell-immutablejs#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/raphaelbs/farewell-immutablejs.git"
+    "url": "git+https://github.com/quintoandar/farewell-immutablejs.git"
   },
   "bugs": {
-    "url": "https://github.com/raphaelbs/farewell-immutablejs/issues"
+    "url": "https://github.com/quintoandar/farewell-immutablejs/issues"
   },
   "keywords": [
     "codemods",

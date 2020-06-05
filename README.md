@@ -1,7 +1,7 @@
 # Farewell ImmutableJS
 
-![](https://github.com/raphaelbs/farewell-immutablejs/workflows/Node.js%20CI/badge.svg)
-![](https://github.com/raphaelbs/farewell-immutablejs/workflows/Node.js%20Package/badge.svg)
+![](https://github.com/quintoandar/farewell-immutablejs/workflows/Node.js%20CI/badge.svg)
+![](https://github.com/quintoandar/farewell-immutablejs/workflows/Node.js%20Package/badge.svg)
 
 Codemods to migrate [Immutable.js](https://github.com/immutable-js/immutable-js) to ES6.
 
@@ -13,11 +13,11 @@ Never heard of codemods? Here is a quick summary from [facebook/codemod](https:/
 
 ```bash
 # installing globally
-npm install -g farewell-immutablejs
-farewell-immutablejs
+npm install -g @quintoandar/farewell-immutablejs
+@quintoandar/farewell-immutablejs
 
 # or using npx
-npx farewell-immutablejs
+npx @quintoandar/farewell-immutablejs
 ```
 
 Use the `--help` flag or refer to the [help file](./src/bin/help.txt).
