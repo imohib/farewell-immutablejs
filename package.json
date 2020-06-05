@@ -39,7 +39,7 @@
     "eslint": "^7.0.0",
     "fs-extra": "^9.0.0",
     "jest": "^26.0.1",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.5"
   },
   "dependencies": {
     "chalk": "^4.0.0",
