@@ -1,7 +1,8 @@
 # Farewell ImmutableJS
 
 ![](https://github.com/quintoandar/farewell-immutablejs/workflows/Node.js%20CI/badge.svg)
-![](https://github.com/quintoandar/farewell-immutablejs/workflows/Node.js%20Package/badge.svg)
+![](https://github.com/quintoandar/farewell-immutablejs/workflows/NPM%20Package/badge.svg)
+![](https://github.com/quintoandar/farewell-immutablejs/workflows/Github%20Package/badge.svg)
 
 Codemods to migrate [Immutable.js](https://github.com/immutable-js/immutable-js) to ES6.
 
