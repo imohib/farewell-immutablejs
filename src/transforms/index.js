@@ -35,4 +35,8 @@ exports.TRANSFORMER_INQUIRER_CHOICES = [
     name: 'Nest FromJS.',
     value: 'nestFromJS',
   },
+  {
+    name: 'Add deprecation comment.',
+    value: 'addDeprecationComment',
+  },
 ];

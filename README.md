@@ -5,6 +5,8 @@
 
 Codemods to migrate [Immutable.js](https://github.com/immutable-js/immutable-js) to ES6.
 
+Check out the [migration guide](MIGRATION.md) for the motivations and step-by-step instructions.
+
 Never heard of codemods? Here is a quick summary from [facebook/codemod](https://github.com/facebook/codemod):
 
 > codemod is a tool/library to assist you with large-scale codebase refactors that can be partially automated but still require human oversight and occasional intervention.
@@ -14,7 +16,7 @@ Never heard of codemods? Here is a quick summary from [facebook/codemod](https:/
 ```bash
 # installing globally
 npm install -g @quintoandar/farewell-immutablejs
-@quintoandar/farewell-immutablejs
+farewell-immutablejs
 
 # or using npx
 npx @quintoandar/farewell-immutablejs
@@ -103,6 +105,23 @@ Use the `--help` flag or refer to the [help file](./src/bin/help.txt).
 + const newState = { ...state, a: 10 };
 ```
 
+### Add deprecation comment
+
+Large codebases might be stuck in a "transitional period" for a considerable amount of time when removing Immutable.
+
+If you have already started to remove it, but are worried about other developers using old code as example and adding the library to new features, 
+consider adding these deprecation messages:
+
+```diff
++ // ImmutableJS usage is deprecated
++ // Please, do not copy & paste or use this snippet as reference :)
++ // How to refactor? See https://guidelines.quintoandar.com.br/#/pwa/removing-immutable
+import { fromJS } from 'immutable';
+```
+
+**Suggestion**: skip test files when running this codemod. 
+Most likely, they will be refactored together with the corresponding application code, so it would just generate more clutter.
+
 ## Unsupported methods
 
 The methods below have either small cost-benefit to implement a codemod or are too difficult to implement given name collisions.
@@ -125,3 +144,7 @@ The methods below have either small cost-benefit to implement a codemod or are t
 - map
 - filter
 - reduce
+
+## Contributing
+
+The codemod implementation is based on [jscodeshift](https://github.com/facebook/jscodeshift), so check out their API documentation.

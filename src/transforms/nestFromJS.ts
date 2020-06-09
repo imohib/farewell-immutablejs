@@ -1,4 +1,4 @@
-import { Transform, CallExpression, ObjectExpression, Property, Literal } from "jscodeshift";
+import { Transform, CallExpression, ObjectExpression, Property } from "jscodeshift";
 
 const hasValidArguments = (callExpression: CallExpression) => {
   return callExpression.arguments.length === 1
