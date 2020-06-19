@@ -1,6 +1,6 @@
 {
   "name": "@quintoandar/farewell-immutablejs",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Codemods to replace ImmutableJS library with ES6.",
   "bin": "dist/bin/index.js",
   "scripts": {
@@ -26,8 +26,8 @@
     "immutablejs",
     "jscodeshift"
   ],
-  "author": "Raphael Brandão",
-  "license": "ISC",
+  "author": "QuintoAndar",
+  "license": "MIT",
   "devDependencies": {
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",
