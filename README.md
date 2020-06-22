@@ -116,7 +116,7 @@ consider adding these deprecation messages:
 ```diff
 + // ImmutableJS usage is deprecated
 + // Please, do not copy & paste or use this snippet as reference :)
-+ // How to refactor? See https://guidelines.quintoandar.com.br/#/pwa/removing-immutable
++ // How to refactor? See https://github.com/quintoandar/farewell-immutablejs/blob/master/MIGRATION.md
 import { fromJS } from 'immutable';
 ```
 

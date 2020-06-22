@@ -1,6 +1,6 @@
 {
   "name": "@quintoandar/farewell-immutablejs",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Codemods to replace ImmutableJS library with ES6.",
   "bin": "dist/bin/index.js",
   "scripts": {
