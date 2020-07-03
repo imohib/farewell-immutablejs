@@ -36,16 +36,87 @@ In case the project is using the [redux-immutable](https://github.com/gajus/redu
 npm remove redux-immutable
 ```
 
+This first change is about removing the Immutable dependency from the global store object.
+
+Replace the `combineReducer` from `redux-immutable` to the `redux` one:
+
+```diff
+- import { combineReducers } from 'redux-immutable`;
++ import { combineReducers } from 'redux';
+
+const appReducer = combineReducers({
+  user: userReducer,
+  // ... more reducers
+  ...asyncReducers,
+});
+```
+
+In case the project has SSR, the hydration may not work with the `combineReducer` from `redux`. (see [redux#2058](https://github.com/reduxjs/redux/issues/2058) and [redux#2427](https://github.com/reduxjs/redux/issues/2427#issuecomment-304499200)). For this case, use `redux-immer`:
+
+```diff
+- import { combineReducers } from 'redux-immutable`;
++ import produce from 'immer';
++ import { combineReducers } from 'redux-immer';
+
+- const appReducer = combineReducers({
++ const appReducer = combineReducers(produce, {
+  user: userReducer,
+  // ... more reducers
+  ...asyncReducers,
+});
+```
+
 #### Refactor root node selectors
+
+The second change is about refactoring all the root selectors from the store.
+
+```jsx
+// With Immutable, the global store object is represented by:
+store = fromJS({
+  user: fromJS({ // note that the fromJS here is because we initialize the reducer states with `fromJS`
+    name: '',
+  }),
+})
+// And its associated selectors would be:
+const selectUser = (state) => state.get('user')
+
+// After performing the combineReducers change, the store object becomes:
+store = {
+  user: fromJS({}),
+}
+// Then it is **required** to change the root selector to:
+const selectUser = (state) => state.user
+```
+
+Note 1: Nested selectors are left unchanged in this first refactor because the reducer state is initialized with `fromJS`:
+
 
 ```diff
 - const selectUser = (state) => state.get('user')
 + const selectUser = (state) => state.user
+
+# Left unchanged
+const selectUserName = (state) => selectUser(state).get('name');
 ```
 
-Note 1: This change can be a hurdle in case the root selector isn’t encapsulated throughout the application. Search for nested set methods (*setIn*, *updateIn*, *mergeIn*, *removeIn*, *mergeDeep*) outside the reducer context.
+Note 2: In case the root selector isn’t encapsulated throughout the application, search for nested set methods (*setIn*, *updateIn*, *mergeIn*, *removeIn*, *mergeDeep*) outside the reducer context.
+```diff
+- const aRandomSelectorOutsideTheUserSelector = store.getState().getIn(['user', 'name']);
++ const aRandomSelectorOutsideTheUserSelector = store.getState().user.get('name');
 
-Note 2: Expect tests to break after this change. Usually the store is mocked with an Immutable object. Use the *nestFromJS* codemod on the test files to change the store object.
+# or even better
+- const aRandomSelectorOutsideTheUserSelector = store.getState().getIn(['user', 'name']);
++ const aRandomSelectorOutsideTheUserSelector = selectUserName(store.getState());
+```
+
+Note 3: Expect tests to break after this change. Usually the store is mocked with an Immutable object. Use the *nestFromJS* codemod on the test files to change the store object.
+
+```diff
+# Selector tests pass the global store as an argument, so we need to descend the fromJS a level:
+
+- expect(selectUserName(fromJS({ user: { name: 'Brandão' } }))).toEqual('Brandão');
++ expect(selectUserName({ user: fromJS({ name: 'Brandão' }) })).toEqual('Brandão');
+```
 
 ### Introduce Immer
 
