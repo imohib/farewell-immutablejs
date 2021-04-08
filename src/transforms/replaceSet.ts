@@ -20,7 +20,7 @@ class Handler {
 
     const firstArg = node.arguments[0];
 
-    if (firstArg.type !== 'Literal' && firstArg.type !== 'Identifier') {
+    if (!(firstArg.type === 'Literal' || firstArg.type === 'StringLiteral') && firstArg.type !== 'Identifier') {
       return false;
     }
 
@@ -62,7 +62,7 @@ class Handler {
 const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
   const root = j(file.source);
-  const collections = root.find(j.CallExpression, {
+  const find = () => root.find(j.CallExpression, {
     callee: {
       type: "MemberExpression",
       property: {
@@ -72,7 +72,12 @@ const transform: Transform = (file, api) => {
     }
   });
 
-  collections.forEach((path) => new Handler(j, path).transform());
+  let collections = find();
+
+  while (collections.length) {
+    collections.forEach((path) => new Handler(j, path).transform());
+    collections = find();
+  }
 
   return root.toSource();
 };

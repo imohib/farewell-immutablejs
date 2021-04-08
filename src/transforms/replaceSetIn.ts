@@ -56,7 +56,7 @@ class Handler {
   }
 
   private normalizeProperty(arg: any) {
-    if (arg?.type === 'Literal') {
+    if (arg?.type === 'Literal' || arg?.type === 'StringLiteral') {
       return this.j.identifier((arg as Literal).value + '');
     }
     
@@ -64,7 +64,7 @@ class Handler {
   }
 
   private isComputed(arg: any) {
-    return arg?.type !== 'Literal';
+    return !(arg?.type === 'Literal' || arg?.type === 'StringLiteral');
   }
 }
 

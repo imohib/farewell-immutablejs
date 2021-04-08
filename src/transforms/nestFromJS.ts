@@ -22,7 +22,7 @@ const transform: Transform = (file, api) => {
       objectExpression.properties.forEach((p) => {
         const property = p as Property;
 
-        if (property.value.type === 'Literal') {
+        if (property.value.type === 'Literal' || property.value.type === 'StringLiteral') {
           const literal = property.value as any;
 
           if (literal.raw) {

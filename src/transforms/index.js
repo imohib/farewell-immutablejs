@@ -39,4 +39,8 @@ exports.TRANSFORMER_INQUIRER_CHOICES = [
     name: 'Add deprecation comment.',
     value: 'addDeprecationComment',
   },
+  {
+    name: 'Replace constructors.',
+    value: 'replaceConstructors',
+  },
 ];
