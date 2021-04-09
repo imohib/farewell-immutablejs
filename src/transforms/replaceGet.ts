@@ -15,6 +15,11 @@ class Handler {
   checkArgumentContract() {
     const node = this.path.node;
 
+    // skip enzyme calls
+    if (node.arguments.some(a => a.type === 'NumericLiteral')) {
+      return false;
+    }
+
     if (node.arguments.length == 0 || node.arguments.length > 2) {
       return false;
     }
@@ -76,11 +81,7 @@ const transform: Transform = (file, api) => {
   });
 
   let collections = find();
-
-  while (collections.length) {
-    collections.forEach((path) => new Handler(j, path).transform());
-    collections = find();
-  }
+  collections.forEach((path) => new Handler(j, path).transform());
 
   return root.toSource();
 };
