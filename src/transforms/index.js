@@ -43,4 +43,8 @@ exports.TRANSFORMER_INQUIRER_CHOICES = [
     name: 'Replace constructors.',
     value: 'replaceConstructors',
   },
+  {
+    name: 'Replace PropTypes.',
+    value: 'replacePropTypes',
+  },
 ];
