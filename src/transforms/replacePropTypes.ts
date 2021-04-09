@@ -24,7 +24,6 @@ const transform: Transform = (file, api) => {
       }
     }
   });
-  console.log('count:', collection.length);
   collection.forEach(n => {
     if (n.node.arguments.length === 1) {
       const arg = n.node.arguments[0];
