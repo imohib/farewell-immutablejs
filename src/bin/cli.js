@@ -103,7 +103,7 @@ function run() {
 
       if (!filesExpanded.length) {
         logger.log(
-          filesBeforeExpansion
+          filesBeforeExpansion instanceof Array
             ? `No files found matching ${filesBeforeExpansion.join(' ')}`
             : 'No files found'
         );
