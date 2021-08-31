@@ -1,4 +1,4 @@
-import { Transform, CallExpression, ASTPath, JSCodeshift, MemberExpression } from "jscodeshift";
+import { Transform, CallExpression, ASTPath, JSCodeshift, MemberExpression, Literal } from "jscodeshift";
 
 class Handler {
   private j: JSCodeshift;
@@ -32,29 +32,18 @@ class Handler {
       return;
     }
 
-    const argument = this.path.node.arguments[0];
-    let newArgument: any = argument;
-    let computed = true;
+    const propertyName = this.path.node.arguments[0] as Literal;
+    const propertyValue = this.path.node.arguments[1] as any;
+    const baseObject = (this.path.node.callee as MemberExpression).object;
 
-    if (argument.type === 'Literal') {
-      newArgument = this.j.identifier(argument.value + '');
-      computed = false;
-    }
-
-    const memberExpression = this.path.node.callee as MemberExpression;
-    const newMemberExpression = this.j.memberExpression(
-      memberExpression.object,
-      newArgument,
-      computed,
-    );
-
-    const defaultExpression = this.path.node.arguments[1] as any;
     this.path.replace(
-      this.j.assignmentExpression(
-        '=',
-        newMemberExpression,
-        defaultExpression,
-      )
+      this.j.objectExpression([
+        this.j.spreadElement(baseObject),
+        this.j.objectProperty(
+          propertyName,
+          propertyValue
+        ),
+      ])
     )
   }
 }
