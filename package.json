@@ -32,7 +32,7 @@
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",
     "@types/jest": "^26.0.0",
-    "@types/jscodeshift": "^0.7.1",
+    "@types/jscodeshift": "^0.11.5",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "babel-jest": "^26.0.1",
@@ -47,7 +47,7 @@
     "globby": "^11.0.1",
     "inquirer": "^7.1.0",
     "is-git-clean": "^1.1.0",
-    "jscodeshift": "^0.10.0",
+    "jscodeshift": "^0.11.0",
     "meow": "^7.0.1"
   }
 }

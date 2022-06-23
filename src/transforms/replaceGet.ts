@@ -15,11 +15,6 @@ class Handler {
   checkArgumentContract() {
     const node = this.path.node;
 
-    // skip enzyme calls
-    if (node.arguments.some(a => a.type === 'NumericLiteral')) {
-      return false;
-    }
-
     if (node.arguments.length == 0 || node.arguments.length > 2) {
       return false;
     }
@@ -38,9 +33,16 @@ class Handler {
     let newArgument: any = argument;
     let computed = true;
 
-    if (argument.type === 'Literal' || argument.type === 'StringLiteral') {
+    if (
+        argument.type === 'Literal' ||
+        argument.type === 'StringLiteral' ||
+        argument.type === 'NumericLiteral'
+    ) {
+      const isNumericLiteral = argument.type === 'NumericLiteral' ||
+        argument.value !== null && !isNaN(+argument.value);
+
       newArgument = this.j.identifier(argument.value + '');
-      computed = false;
+      computed = isNumericLiteral;
     }
 
     const memberExpression = this.path.node.callee as MemberExpression;
@@ -52,16 +54,16 @@ class Handler {
 
     if (this.hasDefault) {
       const defaultExpression = this.path.node.arguments[1] as any;
+      const isPartOfLogicalExpression = this.path.name === 'left' || this.path.name === 'right';
+      const logicalExpression = this.j.logicalExpression(
+        '??',
+        optionalMemberExpression,
+        defaultExpression,
+      );
 
-      this.path.replace(
-        this.j.logicalExpression(
-          '??',
-          optionalMemberExpression,
-          defaultExpression,
-        )
-      )
+      this.path.replace(isPartOfLogicalExpression ? this.j.parenthesizedExpression(logicalExpression) : logicalExpression);
     } else {
-      this.path.replace(optionalMemberExpression)
+      this.path.replace(optionalMemberExpression);
     }
   }
 }
@@ -70,14 +72,12 @@ const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
   const root = j(file.source);
 
-  const find = () => root.find(j.CallExpression, {
-    callee: {
-      type: "MemberExpression",
-      property: {
-        type: "Identifier",
-        name: "get"
-      }
-    }
+  const find = () => root.find(j.CallExpression, (p) => {
+    const callee = p.callee;
+
+    return (callee.type === 'MemberExpression' || callee.type === 'OptionalMemberExpression') &&
+      callee.property.type === 'Identifier' &&
+      callee.property.name === 'get';
   });
 
   let collections = find();
