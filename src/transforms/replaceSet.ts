@@ -51,14 +51,12 @@ class Handler {
 const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
   const root = j(file.source);
-  const find = () => root.find(j.CallExpression, {
-    callee: {
-      type: "MemberExpression",
-      property: {
-        type: "Identifier",
-        name: "set"
-      }
-    }
+  const find = () => root.find(j.CallExpression, (p) => {
+    const callee = p.callee;
+
+    return (callee.type === 'MemberExpression' || callee.type === 'OptionalMemberExpression') &&
+      callee.property.type === 'Identifier' &&
+      callee.property.name === 'set';
   });
 
   let collections = find();

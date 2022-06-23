@@ -71,14 +71,12 @@ class Handler {
 const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
   const root = j(file.source);
-  const collections = root.find(j.CallExpression, {
-    callee: {
-      type: "MemberExpression",
-      property: {
-        type: "Identifier",
-        name: "setIn"
-      }
-    }
+  const collections = root.find(j.CallExpression, (p) => {
+    const callee = p.callee;
+
+    return (callee.type === 'MemberExpression' || callee.type === 'OptionalMemberExpression') &&
+      callee.property.type === 'Identifier' &&
+      callee.property.name === 'setIn';
   });
 
   collections.forEach((path) => new Handler(j, path).transform());

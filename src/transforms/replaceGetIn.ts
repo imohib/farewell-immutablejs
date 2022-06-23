@@ -33,14 +33,14 @@ class Handler {
 
     if (this.hasDefault) {
       const defaultExpression = this.path.node.arguments[1] as any;
-
-      this.path.replace(
-        this.j.logicalExpression(
+      const isPartOfLogicalExpression = this.path.name === 'left' || this.path.name === 'right';
+      const logicalExpression = this.j.logicalExpression(
           '??',
           this.generate(arrayArguments),
           defaultExpression,
-        )
-      )
+      );
+
+      this.path.replace(isPartOfLogicalExpression ? this.j.parenthesizedExpression(logicalExpression) : logicalExpression);
     } else {
       this.path.replace(this.generate(arrayArguments))
     }
@@ -71,21 +71,20 @@ class Handler {
   }
 
   private isComputed(arg: any) {
-    return !(arg?.type === 'Literal' || arg?.type === 'StringLiteral');
+    return !(arg?.type === 'Literal' || arg?.type === 'StringLiteral') ||
+      arg?.type === 'NumericLiteral' || arg?.value !== null && !isNaN(+arg?.value);
   }
 }
 
 const transform: Transform = (file, api) => {
   const j = api.jscodeshift;
   const root = j(file.source);
-  const collections = root.find(j.CallExpression, {
-    callee: {
-      type: "MemberExpression",
-      property: {
-        type: "Identifier",
-        name: "getIn"
-      }
-    }
+  const collections = root.find(j.CallExpression, (p) => {
+    const callee = p.callee;
+
+    return (callee.type === 'MemberExpression' || callee.type === 'OptionalMemberExpression') &&
+      callee.property.type === 'Identifier' &&
+      callee.property.name === 'getIn';
   });
 
   collections.forEach((path) => new Handler(j, path).transform());
