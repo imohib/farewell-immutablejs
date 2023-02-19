@@ -16,11 +16,11 @@ Never heard of codemods? Here is a quick summary from [facebook/codemod](https:/
 
 ```bash
 # installing globally
-npm install -g @quintoandar/farewell-immutablejs
+npm install -g @imohib/farewell-immutablejs
 farewell-immutablejs
 
 # or using npx
-npx @quintoandar/farewell-immutablejs
+npx @imohib/farewell-immutablejs
 ```
 
 Use the `--help` flag or refer to the [help file](./src/bin/help.txt).
@@ -116,7 +116,7 @@ consider adding these deprecation messages:
 ```diff
 + // ImmutableJS usage is deprecated
 + // Please, do not copy & paste or use this snippet as reference :)
-+ // How to refactor? See https://github.com/quintoandar/farewell-immutablejs/blob/master/MIGRATION.md
++ // How to refactor? See https://github.com/imohib/farewell-immutablejs/blob/master/MIGRATION.md
 import { fromJS } from 'immutable';
 ```
 
